@@ -24,12 +24,12 @@ PROJECT_ID = "6Rmr4M4m3McmR9JV"
 SATURDAY = 5
 DAYS_OF_WEEK_JP = ["日", "月", "火", "水", "木", "金", "土"]
 
-def create_day() -> list:
+def create_day() -> list[str]:  # より具体的な型ヒント
     """
     次の土曜日から始まる1週間の日付と曜日を日本語でリストとして返す関数。
     
     Returns:
-        list: 日付と曜日を日本語で表した文字列のリスト。
+        list[str]: 日付と曜日を日本語で表した文字列のリスト。
     """
     today = datetime.date.today()
     logger.debug(f"Today's date: {today}")
@@ -67,10 +67,13 @@ def add_task(content: str) -> None:
     except Exception as error:
         logger.error(f"Error adding task: {error}")
 
-if __name__ == "__main__":
+def main() -> None:
     logger.info("Script started.")
     days = create_day()
     for day in days:
         logger.info(day)
-        # add_task(day)
+        add_task(day)
     logger.info("Script finished.")
+
+if __name__ == "__main__":
+    main()
