@@ -24,7 +24,7 @@ PROJECT_ID = "6Rmr4M4m3McmR9JV"
 SATURDAY = 5
 DAYS_OF_WEEK_JP = ["日", "月", "火", "水", "木", "金", "土"]
 
-def create_day() -> list[str]:  # より具体的な型ヒント
+def create_day() -> list[str]:
     """
     次の土曜日から始まる1週間の日付と曜日を日本語でリストとして返す関数。
     
