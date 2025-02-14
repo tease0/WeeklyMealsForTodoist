@@ -12,6 +12,7 @@ logger = setup_logging()
 
 # 定数
 SECTION_ID = "173865593"
+PROJECT_ID = "6Rmr4M4m3McmR9JV"
 SATURDAY = 5
 DAYS_OF_WEEK_JP = ["日", "月", "火", "水", "木", "金", "土"]
 
