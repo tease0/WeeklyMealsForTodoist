@@ -32,7 +32,7 @@ def initialize_api():
     return TodoistAPI(api_key)
 
 def create_day() -> list[str]:
-    """次の土曜日から始まる1週間の日付と曜日を日本語でリストとして返す関数
+    """来週の土曜日から始まる1週間の日付と曜日を日本語でリストとして返す関数
     
     Returns:
         list[str]: 日付と曜日の文字列のリスト（例: ["1(土):", "2(日):", ...]）
@@ -44,6 +44,10 @@ def create_day() -> list[str]:
     while today.weekday() != SATURDAY:
         today += datetime.timedelta(days=1)
         logger.debug(f"Checking next day: {today}")
+    
+    # 来週の土曜日にする
+    today += datetime.timedelta(days=7)
+    logger.debug(f"Next week's Saturday: {today}")
 
     WEEKDAY_FORMAT = "%w"
     days = []
@@ -117,7 +121,7 @@ def main() -> None:
     days = create_day()
     for day in days:
         logger.info(day)
-        add_task(api, day)
+        #add_task(api, day)
     logger.info("Script finished.")
     
 #
