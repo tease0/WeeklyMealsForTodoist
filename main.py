@@ -121,7 +121,7 @@ def main() -> None:
     days = create_day()
     for day in days:
         logger.info(day)
-        #add_task(api, day)
+        add_task(api, day)
     logger.info("Script finished.")
     
 #
