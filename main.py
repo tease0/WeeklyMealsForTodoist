@@ -39,15 +39,15 @@ def create_day() -> list[str]:
     """
     today = datetime.date.today()
     logger.debug(f"Today's date: {today}")
-    
+
     # 次の土曜日を見つける
-    while today.weekday() != SATURDAY:
-        today += datetime.timedelta(days=1)
-        logger.debug(f"Checking next day: {today}")
-    
+    days_until_saturday = (SATURDAY - today.weekday() + 7) % 7
+    next_saturday = today + datetime.timedelta(days=days_until_saturday)
+
     # 来週の土曜日にする
-    today += datetime.timedelta(days=7)
-    logger.debug(f"Next week's Saturday: {today}")
+    next_saturday += datetime.timedelta(days=7)
+    logger.debug(f"Next week's Saturday: {next_saturday}")
+    today = next_saturday
 
     WEEKDAY_FORMAT = "%w"
     days = []
@@ -63,19 +63,19 @@ def create_day() -> list[str]:
 
 def add_task(api: TodoistAPI, content: str) -> None:
     """Todoistに新しいタスクを追加する関数
-    
+
     Args:
         api (TodoistAPI): TodoistAPIインスタンス
         content (str): 追加するタスクの内容
-        
+
     Returns:
         None
-        
+
     Raises:
         Exception: タスク追加時にエラーが発生した場合
     """
     try:
-        task = api.add_task(content=content, project_id=PROJECT_ID, section_id=SECTION_ID)
+        task: Dict[str, Any] = api.add_task(content=content, project_id=PROJECT_ID, section_id=SECTION_ID)
         logger.info(f"Task added successfully: {task}")
     except Exception as error:
         logger.error(f"Error adding task: {error}")
