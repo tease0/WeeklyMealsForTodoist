@@ -81,35 +81,6 @@ def add_task(api: TodoistAPI, content: str) -> None:
         logger.error(f"Error adding task: {error}")
         raise
 
-def lambda_handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
-    """AWS Lambda用のハンドラー関数
-    
-    Args:
-        event (Dict[str, Any]): Lambda関数のイベントデータ
-        context (Any): Lambda関数のコンテキスト
-        
-    Returns:
-        Dict[str, Any]: レスポンス情報を含む辞書
-            - statusCode (int): HTTPステータスコード
-            - body (str): レスポンスメッセージ
-    """
-    try:
-        api = initialize_api()
-        days = create_day()
-        for day in days:
-            add_task(api, day)
-        
-        return {
-            'statusCode': 200,
-            'body': 'Tasks created successfully'
-        }
-    except Exception as e:
-        logger.error(f"Error in lambda_handler: {str(e)}")
-        return {
-            'statusCode': 500,
-            'body': f'Error: {str(e)}'
-        }
-
 def main() -> None:
     """ローカル実行用のメイン関数
     
